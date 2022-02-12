@@ -106,8 +106,8 @@ for epoch in range(num_epoch):  # 进行多个epoch的训练
             # view()函数作用把img变成[batch_size,channel_size,784]
             img = img.view(num_img,  -1)  # 将图片展开为28*28=784
             real_img = img.to(device) # 将tensor变成Variable放入计算图中
-            real_label = torch.ones(num_img).to(device)# 定义真实的图片label为1
-            fake_label = torch.zeros(num_img).to(device)  # 定义假的图片的label为0
+            real_label = torch.ones(num_img, 1).to(device)# 定义真实的图片label为1
+            fake_label = torch.zeros(num_img, 1).to(device)  # 定义假的图片的label为0
             # print(img.shape)
             # 计算真实图片的损失
             real_out = D(real_img)  # 将真实图片放入判别器中
@@ -139,7 +139,7 @@ for epoch in range(num_epoch):  # 进行多个epoch的训练
 
         z = torch.randn(num_img, z_dimension).to(device) # 得到随机噪声
         fake_img = G(z)  # 随机噪声输入到生成器中，得到一副假的图片
-        output = D(fake_img).squeeze(1)  # 经过判别器得到的结果
+        output = D(fake_img)  # 经过判别器得到的结果
         g_loss = criterion(output, real_label)  # 得到的假的图片与真实的图片的label的loss
 
         # bp and optimize

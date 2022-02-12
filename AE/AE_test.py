@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import os
 from torchvision.utils import make_grid
 
-device='cpu'
+device = 'cpu'
 batch_size = 128
 num_epoch = 1
 z_dimension = 2
